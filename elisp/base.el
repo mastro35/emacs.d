@@ -1,6 +1,7 @@
 (package-initialize)
+
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/")
+	     '("melpa" . "http://melpa.org/packages/")
              '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 
 (when (not package-archive-contents)
@@ -29,7 +30,7 @@
       save-interprogram-paste-before-kill t
       mouse-yank-at-point                 t
       require-final-newline               t
-      visible-bell                        nil
+      visible-bell                        t
       ring-bell-function                  'ignore
       custom-file                         "~/.emacs.d/.custom.el"
       ;; http://ergoemacs.org/emacs/emacs_stop_cursor_enter_prompt.html
@@ -45,7 +46,8 @@
       inhibit-startup-message            t
       fringes-outside-margins            t
       x-select-enable-clipboard          t
-      use-package-always-ensure          t)
+      use-package-always-ensure          t
+	  )
 
 ;; Bookmarks
 (setq
@@ -78,7 +80,13 @@
 (show-paren-mode 1)
 
 ;; Delete trailing whitespace before save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'delete-trailing-whitespace-no-markdown)
+
+;; Truncate lines
+(set-default 'truncate-lines t)
+
+;; Dired will reuse buffer
+(put 'dired-find-alternate-file 'disabled nil)
 
 (provide 'base)
 ;;; base ends here

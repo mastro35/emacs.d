@@ -10,7 +10,14 @@
 
 (use-package dashboard
   :config
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+
+  (setq dashboard-items '((recents  . 5)
+                         (bookmarks . 5)
+			 (projects . 5)))
+
+  )
+
 
 (use-package ediff
   :config
@@ -68,9 +75,9 @@
 
 (use-package magit
   :config
-  
+
   (setq magit-completing-read-function 'ivy-completing-read)
-  
+
   :bind
   ;; Magic
   ("C-x g s" . magit-status)
@@ -125,9 +132,9 @@
   :config
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir))
-  
+
   (setq projectile-completion-system 'ivy)
-  
+
   (projectile-global-mode))
 
 (use-package recentf
@@ -163,5 +170,21 @@
 (use-package yasnippet
   :config
   (yas-global-mode 1))
+
+
+(use-package logview)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(logview-additional-submodes
+   (quote
+    (("Vittoria Danni"
+      (format . "LEVEL TIMESTAMP")
+      (levels . "SLF4J")
+      (timestamp))))))
+
+(use-package nlinum)
 
 (provide 'base-extensions)
